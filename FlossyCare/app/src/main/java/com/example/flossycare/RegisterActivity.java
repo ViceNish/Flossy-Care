@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
-        
+
 
 
         mFirebaseAuth=FirebaseAuth.getInstance();
