@@ -1,80 +1,95 @@
 package com.example.flossycare;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    Button btnAddAppoint, btnAbout;
-    Button btnLogOut;
-
-
-    //ref for firebase Authentication
-    private FirebaseAuth mFirebaseAuth;
-
-    private FirebaseUser mFirebaseUser;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+    Toolbar toolbar;
+    NavigationView navigationView;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      //  startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        
-        //Toolbar toolbar= findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+        toolbar = findViewById(R. id. toolbar);
+        setSupportActionBar(toolbar);
 
-        //find the view
-        btnAddAppoint= (Button) findViewById(R.id.btn_add_appoint);
-        btnAbout= (Button) findViewById(R.id.btn_about);
-        btnLogOut=(Button) findViewById(R.id.btn_logout);
+        drawerLayout = findViewById(R. id. drawer);
+        navigationView = findViewById(R. id. navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
 
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    mFirebaseAuth.signOut();
-                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
-            }
-        });
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        actionBarDrawerToggle.syncState();
 
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R. id. container_fragment, new HomepageFragment());
+        fragmentTransaction.commit();
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        MenuInflater inflater= getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        if(item.getItemId() == R. id. home_nav){
 
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        mFirebaseAuth=FirebaseAuth.getInstance();
-        mFirebaseUser=mFirebaseAuth.getCurrentUser();
-
-        if (mFirebaseUser==null){
-            //go to login page
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R. id. container_fragment, new HomepageFragment());
+            fragmentTransaction.commit();
         }
+
+        if(item.getItemId() == R. id. history_nav){
+
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R. id. container_fragment, new HomepageFragment());
+            fragmentTransaction.commit();
+        }
+        if(item.getItemId() == R. id. profile_nav){
+
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R. id. container_fragment, new HomepageFragment());
+            fragmentTransaction.commit();
+        }
+
+        return true;
     }
 
-  /*  @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }*/
+   /* @Override
+    public void onButtonSelected() {
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R. id. container_fragment, new SecondFragment());
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onButtonActivity() {
+        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+        startActivity(intent);
+    }
+
+*/
 }
