@@ -11,10 +11,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.flossycare.Object.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -22,11 +27,17 @@ public class RegisterActivity extends AppCompatActivity {
     protected Button btnRegister;
     protected TextView tvLogin;
 
+
+
    // List<User> users;
 
   //  DatabaseReference databaseUsers;
 
     private FirebaseAuth mFirebaseAuth;
+
+    List<User> users;
+
+    DatabaseReference databaseUsers;
 
 
     @Override
@@ -43,7 +54,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         tvLogin= (TextView) findViewById(R.id.register_tv_login);
 
-      //  users=new ArrayList<>();
+
+        databaseUsers= FirebaseDatabase.getInstance().getReference("users");
+
+        
 
 
         mFirebaseAuth=FirebaseAuth.getInstance();
@@ -88,6 +102,10 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
+                        String id=databaseUsers.push().getKey();
+                        User newUser=new User(id,email,password,username);
+                        databaseUsers.child(id).setValue(newUser);
+
                         GoToMainActivity();
 
                     }else{
@@ -97,6 +115,8 @@ public class RegisterActivity extends AppCompatActivity {
                     }
 
                 }
+
+
             });
 
         }
