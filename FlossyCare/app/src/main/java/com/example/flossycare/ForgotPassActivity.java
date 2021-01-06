@@ -5,7 +5,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +19,7 @@ public class ForgotPassActivity extends AppCompatActivity {
     protected EditText etEmail;
 
     protected Button btnReset;
-    protected ProgressBar progressBar;
+
 
     private FirebaseAuth mFirebaseAuth;
 
@@ -60,7 +59,7 @@ public class ForgotPassActivity extends AppCompatActivity {
             etEmail.requestFocus();
             return;
         }
-        progressBar.setVisibility(View.VISIBLE);
+
         mFirebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(ForgotPassActivity.this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

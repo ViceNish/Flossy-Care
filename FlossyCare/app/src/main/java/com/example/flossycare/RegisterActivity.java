@@ -3,7 +3,9 @@ package com.example.flossycare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,22 +13,34 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.flossycare.Object.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
     protected EditText etEmail,etUsername,etPassword,etConfirmPassword;
     protected Button btnRegister;
-    protected TextView tvLogin;
+    protected TextView tvLogin, tvTnc;
+    protected CheckBox checkBox;
+
+
 
    // List<User> users;
 
   //  DatabaseReference databaseUsers;
 
     private FirebaseAuth mFirebaseAuth;
+
+   // List<User> users;
+
+    private ArrayAdapter<String> adapter;
+
+    DatabaseReference databaseUsers;
 
 
     @Override
@@ -42,11 +56,14 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister= (Button) findViewById(R.id.register_btn);
 
         tvLogin= (TextView) findViewById(R.id.register_tv_login);
-
-      //  users=new ArrayList<>();
-
+        tvTnc= (TextView) findViewById(R.id.register_tv_tnc);
+        checkBox=(CheckBox) findViewById(R.id.checkBox);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
+
+        databaseUsers= FirebaseDatabase.getInstance().getReference("users");
+
+
 
 
 
@@ -62,6 +79,15 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent= new Intent(RegisterActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        tvTnc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(RegisterActivity.this, TermsNConditionActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -82,20 +108,23 @@ public class RegisterActivity extends AppCompatActivity {
             etPassword.setError("Must Not Be Empty & Must More Than 6 Characters");
         }else if (confirmpassword.isEmpty() || !confirmpassword.equals(password)){
             etConfirmPassword.setError("Password Does Not Match");
-        }else {
+        }else if (!checkBox.isChecked()){
+            checkBox.setError("");
+            Toast.makeText(this, "Please agree to all the Terms and Conditions",Toast.LENGTH_LONG).show();
+        } else {
 
             mFirebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
+                        String id=databaseUsers.push().getKey();
+                        User newUser=new User(id,email,password,username);
+                        databaseUsers.child(id).setValue(newUser);
+
                         GoToMainActivity();
-
                     }else{
-
                         Toast.makeText(RegisterActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
-
                     }
-
                 }
             });
 
