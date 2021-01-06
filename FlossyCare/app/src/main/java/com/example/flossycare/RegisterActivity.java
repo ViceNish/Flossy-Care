@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected EditText etEmail,etUsername,etPassword,etConfirmPassword;
     protected Button btnRegister;
     protected TextView tvLogin;
+    protected CheckBox checkBox;
 
 
 
@@ -54,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister= (Button) findViewById(R.id.register_btn);
 
         tvLogin= (TextView) findViewById(R.id.register_tv_login);
+        checkBox=(CheckBox) findViewById(R.id.checkBox);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
 
@@ -99,7 +102,10 @@ public class RegisterActivity extends AppCompatActivity {
             etPassword.setError("Must Not Be Empty & Must More Than 6 Characters");
         }else if (confirmpassword.isEmpty() || !confirmpassword.equals(password)){
             etConfirmPassword.setError("Password Does Not Match");
-        }else {
+        }else if (!checkBox.isChecked()){
+            checkBox.setError("");
+            Toast.makeText(this, "Please agree to all the Terms and Conditions",Toast.LENGTH_LONG).show();
+        } else {
 
             mFirebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override

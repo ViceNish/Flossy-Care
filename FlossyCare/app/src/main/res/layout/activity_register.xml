@@ -248,4 +248,14 @@
         app:layout_constraintStart_toEndOf="@+id/login_tv_here5"
         app:layout_constraintTop_toTopOf="@+id/login_tv_here5" />
 
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="I have read and agree to the terms and conditions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
