@@ -25,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     protected EditText etEmail,etUsername,etPassword,etConfirmPassword;
     protected Button btnRegister;
-    protected TextView tvLogin;
+    protected TextView tvLogin, tvTnc;
     protected CheckBox checkBox;
 
 
@@ -56,15 +56,12 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister= (Button) findViewById(R.id.register_btn);
 
         tvLogin= (TextView) findViewById(R.id.register_tv_login);
+        tvTnc= (TextView) findViewById(R.id.register_tv_tnc);
         checkBox=(CheckBox) findViewById(R.id.checkBox);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
 
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
-
-
-
-
 
 
 
@@ -82,6 +79,15 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent= new Intent(RegisterActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        tvTnc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(RegisterActivity.this, TermsNConditionActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -116,16 +122,10 @@ public class RegisterActivity extends AppCompatActivity {
                         databaseUsers.child(id).setValue(newUser);
 
                         GoToMainActivity();
-
                     }else{
-
                         Toast.makeText(RegisterActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
-
                     }
-
                 }
-
-
             });
 
         }
