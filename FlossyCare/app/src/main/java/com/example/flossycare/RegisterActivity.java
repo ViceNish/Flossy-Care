@@ -3,6 +3,7 @@ package com.example.flossycare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,8 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
-
 public class RegisterActivity extends AppCompatActivity {
 
     protected EditText etEmail,etUsername,etPassword,etConfirmPassword;
@@ -35,7 +34,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
 
-    List<User> users;
+   // List<User> users;
+
+    private ArrayAdapter<String> adapter;
 
     DatabaseReference databaseUsers;
 
@@ -54,13 +55,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         tvLogin= (TextView) findViewById(R.id.register_tv_login);
 
+        mFirebaseAuth=FirebaseAuth.getInstance();
 
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
 
 
 
-        mFirebaseAuth=FirebaseAuth.getInstance();
+
+
 
 
 
