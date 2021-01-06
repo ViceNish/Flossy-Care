@@ -133,19 +133,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-   /* @Override
-    public void onButtonSelected() {
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R. id. container_fragment, new SecondFragment());
-        fragmentTransaction.commit();
-    }
-
-    @Override
-    public void onButtonActivity() {
-        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-        startActivity(intent);
-    }
-
-*/
 }
