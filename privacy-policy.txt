@@ -1,8 +1,10 @@
-Privacy Policy of Flossy Care
+# Privacy Policy of Flossy Care
 At Flossy Care, we collect and manage user data according to the following Privacy Policy.
-Data Collected
+
+# Data Collected
 We collect information you provide directly to us. For example, we collect information when you create an account, fill out a form, request customer support or otherwise communicate with us. The types of information we may collect include your name, email address and password as an identification.
-Use of the Data
+
+# Use of the Data
 We only use your personal information to provide you the Flossy Care services.
 We employ industry standard techniques to protect against unauthorized access of data about you that we store, including personal information.
 We do not share personal information you have provided to us without your consent, unless:
