@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,11 +16,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentAbout.onFragmentBtnSelected{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentAbout.onFragmentBtnSelected,FragmentProfile.onFragmentBtnSelected{
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -39,8 +42,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar = findViewById(R. id. toolbar);
         setSupportActionBar(toolbar);
+        //buang title kt actionbar
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         drawerLayout = findViewById(R. id. drawer);
+
         navigationView = findViewById(R. id. navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -69,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (mFirebaseUser==null){
             //go to login page
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, StartScreenActivity.class);
             startActivity(intent);
         }
     }
@@ -126,19 +132,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-   /* @Override
-    public void onButtonSelected() {
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R. id. container_fragment, new SecondFragment());
-        fragmentTransaction.commit();
+    @Override
+    public void onBtnChangePassword() {
+        Intent intent = new Intent(MainActivity.this, ChangePasswordActivity.class);
+        startActivity(intent);
+
     }
 
     @Override
-    public void onButtonActivity() {
-        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-        startActivity(intent);
+    public void onBtnDeleteAcc(){
+        AlertDialog.Builder dialog=new AlertDialog.Builder(MainActivity.this);
+        dialog.setTitle("Are You Sure?");
+        dialog.setMessage("Deleting this account will result completely removing your account from the system and you won't be able to access the app.");
+        dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mFirebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(MainActivity.this,"Account Deleted",Toast.LENGTH_LONG).show();
+                            Intent intent=new Intent(MainActivity.this,StartScreenActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(MainActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+        });
+
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
     }
 
-*/
 }

@@ -3,7 +3,7 @@ package com.example.flossycare.Object;
 public class User {
     private String userID;
     private String userEmail;
-    private String userPassword;
+   // private String userPassword;
     private String userUsername;
 
     public User() {
@@ -12,7 +12,7 @@ public class User {
     public User(String userID, String userEmail, String userPassword, String userUsername) {
         this.userID = userID;
         this.userEmail = userEmail;
-        this.userPassword = userPassword;
+        //this.userPassword = userPassword;
         this.userUsername = userUsername;
     }
 
@@ -32,13 +32,13 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
+   // public String getUserPassword() {
+     //   return userPassword;
+    //}
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
+    //public void setUserPassword(String userPassword) {
+     //   this.userPassword = userPassword;
+   // }
 
     public String getUserUsername() {
         return userUsername;

@@ -14,7 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotPassActivity extends AppCompatActivity {
+public class ResetPassActivity extends AppCompatActivity {
 
     protected EditText etEmail;
 
@@ -26,7 +26,7 @@ public class ForgotPassActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_pass);
+        setContentView(R.layout.activity_reset_pass);
         etEmail=(EditText) findViewById(R.id.login_et_email);
 
         btnReset=(Button) findViewById(R.id.btn_reset);
@@ -60,13 +60,13 @@ public class ForgotPassActivity extends AppCompatActivity {
             return;
         }
 
-        mFirebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(ForgotPassActivity.this, new OnCompleteListener<Void>() {
+        mFirebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(ResetPassActivity.this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    Toast.makeText(ForgotPassActivity.this, "Check Your Email To Reset Your Password!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResetPassActivity.this, "Check Your Email To Reset Your Password!",Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(ForgotPassActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResetPassActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
         });
