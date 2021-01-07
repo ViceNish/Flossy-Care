@@ -39,8 +39,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar = findViewById(R. id. toolbar);
         setSupportActionBar(toolbar);
+        //buang title kt actionbar
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         drawerLayout = findViewById(R. id. drawer);
+
         navigationView = findViewById(R. id. navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (mFirebaseUser==null){
             //go to login page
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, StartScreenActivity.class);
             startActivity(intent);
         }
     }
