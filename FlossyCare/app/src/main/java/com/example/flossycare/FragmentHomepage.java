@@ -38,6 +38,8 @@ public class FragmentHomepage extends Fragment {
 
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
+        Details dt = Details.getItnstance();
+        tvUsername.setText("Hello "+dt.getUsername());
        //getUsername();
 
       //  listener.onTvUsername();
