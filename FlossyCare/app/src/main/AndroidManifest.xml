@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_flosy_care_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FlossyCare">
-        <activity android:name=".StartScreenActivity"></activity>
+        <activity android:name=".DeleteAccActivity"></activity>
+        <activity android:name=".StartScreenActivity" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".PPActivity" />
         <activity android:name=".TermsNConditionActivity" />
