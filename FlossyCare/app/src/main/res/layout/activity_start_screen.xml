@@ -4,50 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+
     tools:context=".StartScreenActivity">
+
+    android:background="@drawable/background"
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="415dp"
+        android:layout_height="659dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/b7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_started"
-        android:layout_width="347dp"
-        android:layout_height="70dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
 
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#00acc1"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#018AD5"
         android:fontFamily="@font/comfortaa"
         android:text="LET'S GET STARTED"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="131dp"
-        android:layout_height="105dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView27"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="121dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/flossy2" />
 
     <TextView
         android:id="@+id/textView27"
-        android:layout_width="379dp"
-        android:layout_height="wrap_content"
+        android:layout_width="273dp"
+        android:layout_height="58dp"
 
 
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/comfortaa"
         android:gravity="center_horizontal"
         android:text="Flossy Care"
         android:textColor="#FFFFFF"
-        android:textSize="40sp"
+        android:textSize="45sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.448" />
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
