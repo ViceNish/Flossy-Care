@@ -2,6 +2,7 @@ package com.example.flossycare;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,11 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class FragmentHomepage extends Fragment {
 
@@ -25,10 +29,12 @@ public class FragmentHomepage extends Fragment {
     DatabaseReference databaseUsers;
     private FirebaseUser mFirebaseUser;
     private onFragmentBtnSelected listener;
+    private FirebaseDatabase db;
+    private DatabaseReference dbUser;
+    private String user;
+    private String id;
 
     Button btnAddappointment;
-
-
 
     @Nullable
     @Override
@@ -40,14 +46,41 @@ public class FragmentHomepage extends Fragment {
         mFirebaseAuth=FirebaseAuth.getInstance();
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
-        Details dt = Details.getItnstance();
+        /*Details dt = Details.getItnstance();
 
-        if(dt.getUsername() == null){
+        mFirebaseAuth=FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        id = mFirebaseUser.getUid(); //Do what you need to do with the id
+        dbUser = db.getReference("users/"+id);
+
+        if(mFirebaseUser != null) {
+            id = mFirebaseUser.getUid(); //Do what you need to do with the id
+
+            dbUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    user = snapshot.child("userUsername").getValue(String.class);
+
+                    tvUsername.setText(user);
+                    //dt.setDoctor(id);
+                   // dt.setUsername(user);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }*/
+
+        /*if(dt.getUsername() == null){
             Toast.makeText(getActivity(),"null value",Toast.LENGTH_LONG).show();
-            tvUsername.setText(dt.getDoctor());
+            tvUsername.setText(dt.getUsername());
         }else{
             tvUsername.setText("Hello "+dt.getUsername());
-        }
+        }*/
 
 
 
