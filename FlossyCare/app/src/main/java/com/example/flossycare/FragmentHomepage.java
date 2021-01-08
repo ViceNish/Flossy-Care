@@ -29,7 +29,7 @@ public class FragmentHomepage extends Fragment {
     private String user;
     private String id;
 
-    Button btnAddappointment;
+    private Button btnAddappointment;
 
 
 

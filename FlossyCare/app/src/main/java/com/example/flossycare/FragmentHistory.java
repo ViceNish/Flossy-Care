@@ -67,9 +67,12 @@ public class FragmentHistory extends Fragment {
 
                     //String appointment = snapshot.child(user).getValue(String.class);
                     Appointment appointment = historySnapshot.getValue(Appointment.class);
-                    history.add(appointment);
 
-                    lvHistory.add(appointment.getClinicDetails() + "\n" + appointment.getDoctorDetails() + "\n" + appointment.getDateDetails() + " , " + appointment.getTimeDetails());
+                    if(appointment.getEmailDetails().toString().equals(dt.getEmail())) {
+                        
+                        history.add(appointment);
+                        lvHistory.add(appointment.getEmailDetails() + "\n" + appointment.getIDDetails() + "\n" + appointment.getClinicDetails() + "\n" + appointment.getDoctorDetails() + "\n" + appointment.getDateDetails() + " , " + appointment.getTimeDetails());
+                    }
                 }
 
             }
