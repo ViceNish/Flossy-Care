@@ -97,7 +97,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
                 String date=dt.getDate();
                 String time=dt.getTime();
 
-                String id=databaseAppoinments.push().getKey();
+                String id=mFirebaseAuth.getCurrentUser().getUid();
                 Appointment newAppointment=new Appointment(id,email,clinic,doctor,date,time);
                 databaseAppoinments.child(id).setValue(newAppointment);
 

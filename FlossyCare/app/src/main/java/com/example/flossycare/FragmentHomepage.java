@@ -38,12 +38,17 @@ public class FragmentHomepage extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R. layout.fragment_homepage, container, false);
 
+        Details dt = Details.getItnstance();
+
         tvUsername=(TextView) view.findViewById(R.id.tvUsername);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
         tvUsername.setText(mFirebaseAuth.getCurrentUser().getEmail());
+        dt.setEmail(tvUsername.getText().toString());
+
+
         /*Details dt = Details.getItnstance();
 
         mFirebaseAuth=FirebaseAuth.getInstance();
