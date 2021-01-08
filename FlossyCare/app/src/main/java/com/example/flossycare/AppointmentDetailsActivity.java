@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.flossycare.Object.Appointment;
 import com.example.flossycare.Object.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class AppointmentDetailsActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
-    DatabaseReference databaseUsers;
+    DatabaseReference databaseUsers,databaseAppoinments;
     private FirebaseUser mFirebaseUser;
     private FragmentHomepage.onFragmentBtnSelected listener;
     private FirebaseDatabase db;
@@ -49,6 +51,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
 
         mFirebaseAuth= FirebaseAuth.getInstance();
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
+        databaseAppoinments=FirebaseDatabase.getInstance().getReference("appointments");
 
         mFirebaseAuth=FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
@@ -88,10 +91,31 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AppointmentDetailsActivity.this, MainActivity.class);
-                startActivity(intent);
+                String email=mFirebaseAuth.getCurrentUser().getEmail();
+                String clinic=dt.getClinic();
+                String doctor=dt.getDoctor();
+                String date=dt.getDate();
+                String time=dt.getTime();
+
+                String id=databaseAppoinments.push().getKey();
+                Appointment newAppointment=new Appointment(id,email,clinic,doctor,date,time);
+                databaseAppoinments.child(id).setValue(newAppointment);
+
+                Toast.makeText(AppointmentDetailsActivity.this,"Your Appointment Have Been Submited",Toast.LENGTH_LONG).show();
+                GoToMainActivity();
+
             }
         });
 
     }
+
+
+    private void GoToMainActivity(){
+
+        Intent intent = new Intent(AppointmentDetailsActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
 }
