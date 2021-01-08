@@ -12,12 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class FragmentProfile extends Fragment {
 
-    private TextView tvChangePass;
+    private TextView tvChangePass, tvEmail;
     private Button btnDeleteAcc;
 
+
     private onFragmentBtnSelected listener;
+
+    private FirebaseAuth mFirebaseAuth;
+
+    DatabaseReference databaseUsers;
 
     @Nullable
     @Override
@@ -27,6 +36,16 @@ public class FragmentProfile extends Fragment {
 
         tvChangePass=(TextView) view.findViewById(R.id.btn_change_password);
         btnDeleteAcc=(Button) view.findViewById(R.id.btn_delete_acc);
+        tvEmail = (TextView) view.findViewById(R.id. tV_profile_email);
+
+       // Details dt = Details.getItnstance();
+
+        //tvUsername.setText(dt.getUsername());
+
+        mFirebaseAuth=FirebaseAuth.getInstance();
+        databaseUsers= FirebaseDatabase.getInstance().getReference("users");
+
+        tvEmail.setText(mFirebaseAuth.getCurrentUser().getEmail());
 
         tvChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +61,8 @@ public class FragmentProfile extends Fragment {
             }
         });
         return view;
+
+
     }
 
 

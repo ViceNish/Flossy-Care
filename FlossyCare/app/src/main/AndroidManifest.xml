@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_flosy_care_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FlossyCare">
+        <activity android:name=".AppointmentDetailsActivity"></activity>
+        <activity android:name=".CalendarActivity" />
+        <activity android:name=".DoctorActivity" />
+        <activity android:name=".ClinicActivity" />
         <activity android:name=".StartScreenActivity" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".PPActivity" />

@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    protected EditText etEmail,etUsername,etPassword,etConfirmPassword;
+    protected EditText etEmail,etPassword,etConfirmPassword;
     protected Button btnRegister;
     protected TextView tvLogin, tvTnc;
     protected CheckBox checkBox;
@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         etEmail= (EditText) findViewById(R.id.register_et_email);
-        etUsername= (EditText) findViewById(R.id.register_et_username);
+       // etUsername= (EditText) findViewById(R.id.register_et_username);
         etPassword= (EditText) findViewById(R.id.register_et_password);
         etConfirmPassword= (EditText) findViewById(R.id.register_et_confirm_password);
 
@@ -97,14 +97,14 @@ public class RegisterActivity extends AppCompatActivity {
     private void checkCredentialsAndSuccess(){
 
         String email=etEmail.getText().toString().trim();
-        String username=etUsername.getText().toString().trim();
+       // String username=etUsername.getText().toString().trim();
         String password=etPassword.getText().toString().trim();
         String confirmpassword=etConfirmPassword.getText().toString().trim();
         if(email.isEmpty() || !email.contains("@")){
             etEmail.setError("Must Be Valid Email Address");
-        }else  if (username.isEmpty() || username.length()<5){
-            etUsername.setError("Must Not Be Empty & Must More Than 5 Characters");
-        }else  if (password.isEmpty() || password.length()<6){
+        }//else  if (username.isEmpty() || username.length()<5){
+            //etUsername.setError("Must Not Be Empty & Must More Than 5 Characters");
+        else  if (password.isEmpty() || password.length()<6){
             etPassword.setError("Must Not Be Empty & Must More Than 6 Characters");
         }else if (confirmpassword.isEmpty() || !confirmpassword.equals(password)){
             etConfirmPassword.setError("Password Does Not Match");
@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         String id=databaseUsers.push().getKey();
-                        User newUser=new User(id,email,password,username);
+                        User newUser=new User(id,email,password);
                         databaseUsers.child(id).setValue(newUser);
 
                         GoToMainActivity();

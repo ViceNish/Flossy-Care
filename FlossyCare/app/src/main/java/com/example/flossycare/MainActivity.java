@@ -22,7 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentAbout.onFragmentBtnSelected,FragmentProfile.onFragmentBtnSelected{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentAbout.onFragmentBtnSelected,FragmentProfile.onFragmentBtnSelected, FragmentHomepage.onFragmentBtnSelected{
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -33,6 +33,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+
+   // List<User> users;
+  //
+  //  DatabaseReference databaseUsers;
+
+  //  private FirebaseDatabase db;
+   // private DatabaseReference dbUser;
+   // private String user="";
+   // private String id;
 
 
     @Override
@@ -55,16 +64,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
 
+
+
+
+
+        /*
+        mFirebaseAuth=FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        dbUser = db.getReference("users");
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        id = mFirebaseUser.getUid(); //Do what you need to do with the id
+
+
+        if(mFirebaseUser != null) {
+            id = mFirebaseUser.getUid(); //Do what you need to do with the id
+            Log.v("MainActivity", id);
+
+            dbUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    user = snapshot.child(id).child("userUsername").getValue(String.class);
+                    Details dt = Details.getItnstance();
+                    dt.setDoctor(id);
+                    dt.setUsername(user);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }*/
+
+       // id = mFirebaseUser.getUid();
+
+
         /*fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R. id. container_fragment, new FragmentHomepage());
         fragmentTransaction.commit();*/
         getSupportFragmentManager().beginTransaction().add(R. id. container_fragment,new FragmentHomepage()).commit();
-
-
-        //mFirebaseAuth=FirebaseAuth.getInstance();
-
     }
+
 
     @Override
     protected void onResume() {
@@ -175,4 +216,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.show();
     }
 
+
+    @Override
+    public void onBtnAddAppointment() {
+        Intent intent = new Intent(MainActivity.this, ClinicActivity.class);
+        startActivity(intent);
+    }
 }
