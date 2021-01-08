@@ -45,7 +45,14 @@ public class FragmentHomepage extends Fragment {
         mFirebaseAuth=FirebaseAuth.getInstance();
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
-        tvUsername.setText(mFirebaseAuth.getCurrentUser().getEmail());
+        //perlu letak try n catch sbb "The problem seems to be that your user is not yet logged in or even registered. So calling mAuth.getCurrentUser() returns null."
+        //basically, kalau x letak nnty dye crash mase first time buka
+        try {
+            tvUsername.setText(mFirebaseAuth.getCurrentUser().getEmail());
+        }catch (Exception e){
+
+        }
+
         dt.setEmail(tvUsername.getText().toString());
 
 
