@@ -1,9 +1,11 @@
 package com.example.flossycare;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,12 +20,12 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FragmentHomepage extends Fragment {
 
     private TextView tvUsername;
-
     private FirebaseAuth mFirebaseAuth;
-
     DatabaseReference databaseUsers;
-
     private FirebaseUser mFirebaseUser;
+    private onFragmentBtnSelected listener;
+
+    Button btnAddappointment;
 
 
 
@@ -35,11 +37,18 @@ public class FragmentHomepage extends Fragment {
         tvUsername=(TextView) view.findViewById(R.id.tvUsername);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
-
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
         Details dt = Details.getItnstance();
         tvUsername.setText("Hello "+dt.getUsername());
+
+        btnAddappointment = view.findViewById(R. id. btn_add_appoint);
+        btnAddappointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onBtnAddAppointment();
+            }
+        });
        //getUsername();
 
       //  listener.onTvUsername();
@@ -48,6 +57,17 @@ public class FragmentHomepage extends Fragment {
         return view;
 
 
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if(context instanceof FragmentHomepage.onFragmentBtnSelected){
+            listener = (FragmentHomepage.onFragmentBtnSelected) context;
+        }else{
+            throw new ClassCastException(context.toString() + " must implement listener");
+        }
     }
 
     /*private void getUsername(){
@@ -83,7 +103,9 @@ public class FragmentHomepage extends Fragment {
 
             }
         });*/
-    
+    public interface onFragmentBtnSelected {
+        public void onBtnAddAppointment();
+    }
 
 
 }

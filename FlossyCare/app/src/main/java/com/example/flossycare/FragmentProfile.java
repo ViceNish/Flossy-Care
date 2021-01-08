@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 
 public class FragmentProfile extends Fragment {
 
-    private TextView tvChangePass;
+    private TextView tvChangePass, tvUsername;
     private Button btnDeleteAcc;
 
     private onFragmentBtnSelected listener;
@@ -27,6 +27,11 @@ public class FragmentProfile extends Fragment {
 
         tvChangePass=(TextView) view.findViewById(R.id.btn_change_password);
         btnDeleteAcc=(Button) view.findViewById(R.id.btn_delete_acc);
+        tvUsername = view.findViewById(R.id. tV_profile_username);
+
+        Details dt = Details.getItnstance();
+
+        tvUsername.setText(dt.getUsername());
 
         tvChangePass.setOnClickListener(new View.OnClickListener() {
             @Override

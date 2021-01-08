@@ -3,16 +3,13 @@
 
 
     <stroke
-        android:width="5sp"
+        android:width="2sp"
         android:color="#00acc1"
 
         />
 
     <corners
-        android:topLeftRadius="5sp"
-        android:bottomLeftRadius="5sp"
-        android:bottomRightRadius="5sp"
-        android:topRightRadius="5sp"
+        android:radius="20dp"
 
 
         />

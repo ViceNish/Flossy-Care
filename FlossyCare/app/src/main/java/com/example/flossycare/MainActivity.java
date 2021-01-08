@@ -3,6 +3,7 @@ package com.example.flossycare;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentAbout.onFragmentBtnSelected,FragmentProfile.onFragmentBtnSelected{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentAbout.onFragmentBtnSelected,FragmentProfile.onFragmentBtnSelected, FragmentHomepage.onFragmentBtnSelected{
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -38,7 +39,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private FirebaseDatabase db;
+    private DatabaseReference dbUser;
+    private String user="";
+    private String id;
 
 
     @Override
@@ -62,35 +66,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.syncState();
 
         mFirebaseAuth=FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        dbUser = db.getReference("users");
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        id = mFirebaseUser.getUid(); //Do what you need to do with the id
+        Log.v("MainActivity", "hi "+id);
+        if(mFirebaseUser != null) {
+            id = mFirebaseUser.getUid(); //Do what you need to do with the id
+            Log.v("MainActivity", id);
+
+            dbUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    user = snapshot.child(id).child("userID").getValue(String.class);
+                    Details dt = Details.getItnstance();
+                    dt.setUsername(user);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+       // id = mFirebaseUser.getUid();
 
 
-        DatabaseReference dbUser = db.getReference("Users");
-        String id = mFirebaseAuth.getCurrentUser().getUid();
-        DatabaseReference username = dbUser.child(id);
-
-        username.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String username = (String) snapshot.getValue();
-                Details dt = Details.getItnstance();
-                dt.setUsername(username);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
         /*fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R. id. container_fragment, new FragmentHomepage());
         fragmentTransaction.commit();*/
         getSupportFragmentManager().beginTransaction().add(R. id. container_fragment,new FragmentHomepage()).commit();
-
-
-
-
-
     }
 
 
@@ -203,4 +210,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.show();
     }
 
+
+    @Override
+    public void onBtnAddAppointment() {
+        Intent intent = new Intent(MainActivity.this, ClinicActivity.class);
+        startActivity(intent);
+    }
 }
