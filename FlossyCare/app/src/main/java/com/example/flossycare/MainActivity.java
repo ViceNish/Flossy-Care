@@ -3,7 +3,6 @@ package com.example.flossycare;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -22,11 +21,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentAbout.onFragmentBtnSelected,FragmentProfile.onFragmentBtnSelected, FragmentHomepage.onFragmentBtnSelected{
 
@@ -39,10 +33,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    private FirebaseDatabase db;
-    private DatabaseReference dbUser;
-    private String user="";
-    private String id;
+
+   // List<User> users;
+  //
+  //  DatabaseReference databaseUsers;
+
+  //  private FirebaseDatabase db;
+   // private DatabaseReference dbUser;
+   // private String user="";
+   // private String id;
 
 
     @Override
@@ -64,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
+
+
+
 
 
         /*

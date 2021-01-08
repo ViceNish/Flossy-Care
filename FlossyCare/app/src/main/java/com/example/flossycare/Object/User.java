@@ -4,16 +4,16 @@ public class User {
     private String userID;
     private String userEmail;
    // private String userPassword;
-    private String userUsername;
+    //private String userUsername;
 
     public User() {
     }
 
-    public User(String userID, String userEmail, String userPassword, String userUsername) {
+    public User(String userID, String userEmail, String userPassword) {
         this.userID = userID;
         this.userEmail = userEmail;
         //this.userPassword = userPassword;
-        this.userUsername = userUsername;
+       // this.userUsername = userUsername;
     }
 
     public String getUserID() {
@@ -40,11 +40,11 @@ public class User {
      //   this.userPassword = userPassword;
    // }
 
-    public String getUserUsername() {
-        return userUsername;
-    }
+   // public String getUserUsername() {
+     //   return userUsername;
+    //}
 
-    public void setUserUsername(String userUsername) {
-        this.userUsername = userUsername;
-    }
+   // public void setUserUsername(String userUsername) {
+     //   this.userUsername = userUsername;
+    //}
 }

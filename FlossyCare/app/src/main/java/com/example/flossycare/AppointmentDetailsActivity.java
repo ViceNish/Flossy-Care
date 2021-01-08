@@ -1,13 +1,13 @@
 package com.example.flossycare;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.flossycare.Object.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,7 +63,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     User user = snapshot.getValue(User.class);
 
-                    userName.setText(user.getUserID());
+                    //userName.setText(user.getUserID());
                     //dt.setDoctor(id);
                     // dt.setUsername(user);
                 }
