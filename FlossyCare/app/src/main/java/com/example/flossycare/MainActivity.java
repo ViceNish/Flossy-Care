@@ -65,12 +65,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
 
+        Details dt = Details.getItnstance();
+
         mFirebaseAuth=FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
         dbUser = db.getReference("users");
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         id = mFirebaseUser.getUid(); //Do what you need to do with the id
-        Log.v("MainActivity", "hi "+id);
+        dt.setDoctor(id);
+
         if(mFirebaseUser != null) {
             id = mFirebaseUser.getUid(); //Do what you need to do with the id
             Log.v("MainActivity", id);
@@ -78,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             dbUser.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    user = snapshot.child(id).child("userID").getValue(String.class);
-                    Details dt = Details.getItnstance();
+                    user = snapshot.child(id).child("userUsername").getValue(String.class);
+
                     dt.setUsername(user);
                 }
 

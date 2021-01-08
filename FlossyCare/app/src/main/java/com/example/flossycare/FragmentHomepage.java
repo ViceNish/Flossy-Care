@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +41,15 @@ public class FragmentHomepage extends Fragment {
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
         Details dt = Details.getItnstance();
-        tvUsername.setText("Hello "+dt.getUsername());
+
+        if(dt.getUsername() == null){
+            Toast.makeText(getActivity(),"null value",Toast.LENGTH_LONG).show();
+            tvUsername.setText(dt.getDoctor());
+        }else{
+            tvUsername.setText("Hello "+dt.getUsername());
+        }
+
+
 
         btnAddappointment = view.findViewById(R. id. btn_add_appoint);
         btnAddappointment.setOnClickListener(new View.OnClickListener() {
