@@ -29,7 +29,7 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
     private String user;
     private String id;
 
-    TextView userName, doctorName, clinicName, date, time;
+    private TextView Namemail, doctorName, clinicName, date, time;
     Button btnSubmit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,8 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         clinicName = findViewById(R. id.tv_clinic_name);
         date = findViewById(R. id. tv_date_details);
         time = findViewById(R. id. tv_time_details);
-        userName = findViewById(R. id. tv_name);
+        Namemail = findViewById(R. id. tv_name);
+
 
         mFirebaseAuth= FirebaseAuth.getInstance();
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
@@ -54,6 +55,8 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         id = mFirebaseUser.getUid(); //Do what you need to do with the id
         dbUser = db.getReference("users/"+id);
+
+        Namemail.setText(mFirebaseAuth.getCurrentUser().getEmail());
 
         if(mFirebaseUser != null) {
             id = mFirebaseUser.getUid(); //Do what you need to do with the id

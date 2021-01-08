@@ -2,24 +2,28 @@ package com.example.flossycare.Object;
 
 public class Appointment {
 
-    private String doctorDetails;
+    private String emailDetails;
     private String clinicDetails;
+    private String doctorDetails;
+
     private String dateDetails;
     private String timeDetails;
 
-    public Appointment(String doctorDetails, String clinicDetails, String dateDetails, String timeDetails) {
-        this.doctorDetails = doctorDetails;
+    public Appointment( String emailDetails,String  clinicDetails,String doctorDetails, String dateDetails, String timeDetails) {
+        this.emailDetails=emailDetails;
         this.clinicDetails = clinicDetails;
+        this.doctorDetails = doctorDetails;
+
         this.dateDetails = dateDetails;
         this.timeDetails = timeDetails;
     }
 
-    public String getDoctorDetails() {
-        return doctorDetails;
+    public String getEmailDetails() {
+        return emailDetails;
     }
 
-    public void setDoctorDetails(String doctorDetails) {
-        this.doctorDetails = doctorDetails;
+    public void setEmailDetails(String emailDetails) {
+        this.emailDetails = emailDetails;
     }
 
     public String getClinicDetails() {
@@ -29,6 +33,16 @@ public class Appointment {
     public void setClinicDetails(String clinicDetails) {
         this.clinicDetails = clinicDetails;
     }
+
+
+    public String getDoctorDetails() {
+        return doctorDetails;
+    }
+
+    public void setDoctorDetails(String doctorDetails) {
+        this.doctorDetails = doctorDetails;
+    }
+
 
     public String getDateDetails() {
         return dateDetails;
