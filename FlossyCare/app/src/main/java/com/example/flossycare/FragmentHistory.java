@@ -1,13 +1,11 @@
 package com.example.flossycare;
 
 import android.os.Bundle;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,7 +69,7 @@ public class FragmentHistory extends Fragment {
                     if(appointment.getEmailDetails().toString().equals(dt.getEmail())) {
 
                         history.add(appointment);
-                        lvHistory.add(appointment.getEmailDetails()+ "\n" + appointment.getClinicDetails() + "\n" + appointment.getDoctorDetails() + "\n" + appointment.getDateDetails() + " , " + appointment.getTimeDetails()+"\n");
+                        lvHistory.add("Email : "+appointment.getEmailDetails()+ "\nClinic : " + appointment.getClinicDetails() + "\nDoctor : " + appointment.getDoctorDetails() + "\nDate and Time : " + appointment.getDateDetails() + " , " + appointment.getTimeDetails()+"\n");
                     }
                 }
 
