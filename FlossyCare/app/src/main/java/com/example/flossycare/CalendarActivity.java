@@ -1,8 +1,5 @@
 package com.example.flossycare;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -12,6 +9,10 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 
@@ -32,11 +33,14 @@ public class CalendarActivity extends AppCompatActivity {
 
         tVdate = findViewById(R. id. dateView);
         calendarView = findViewById(R. id. calendarView);
+        //can't select past date
+        calendarView.setMinDate(System.currentTimeMillis() - 1000);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 month +=1;
                 String date = dayOfMonth + "/" + month + "/" +year;
+
                 tVdate.setText(date);
             }
         });
@@ -70,9 +74,20 @@ public class CalendarActivity extends AppCompatActivity {
                 Details dt = Details.getItnstance();
                 dt.setDate(tVdate.getText().toString());
                 dt.setTime(tVtime.getText().toString());
+                if(dt.getTime().toString().equals(" --:-- ")  && dt.getDate().toString().equals("dd/mm/yy")){
+                    Toast.makeText(getApplicationContext(), "Please enter the date and time", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(CalendarActivity.this, AppointmentDetailsActivity.class);
-                startActivity(intent);
+                }else if (dt.getTime().toString().equals(" --:-- ")){
+                    Toast.makeText(getApplicationContext(), "Please enter the time", Toast.LENGTH_LONG).show();
+
+                }else if (dt.getDate().toString().equals("dd/mm/yy")){
+                    Toast.makeText(getApplicationContext(), "Please enter the date by tap on the calendar", Toast.LENGTH_LONG).show();
+
+                }else{
+                    Intent intent = new Intent(CalendarActivity.this, AppointmentDetailsActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 

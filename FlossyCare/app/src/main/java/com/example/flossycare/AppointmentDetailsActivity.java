@@ -1,5 +1,6 @@
 package com.example.flossycare;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.flossycare.Object.Appointment;
@@ -91,19 +93,57 @@ public class AppointmentDetailsActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email=mFirebaseAuth.getCurrentUser().getEmail();
-                String clinic=dt.getClinic();
-                String doctor=dt.getDoctor();
-                String date=dt.getDate();
-                String time=dt.getTime();
 
-                //String id=mFirebaseAuth.getCurrentUser().getUid();
-                String id=databaseUsers.push().getKey();
-                Appointment newAppointment=new Appointment(id,email,clinic,doctor,date,time);
-                databaseAppoinments.child(id).setValue(newAppointment);
+                AlertDialog.Builder alert = new AlertDialog.Builder(AppointmentDetailsActivity.this);
 
-                Toast.makeText(AppointmentDetailsActivity.this,"Your Appointment Have Been Submited",Toast.LENGTH_LONG).show();
-                GoToMainActivity();
+                alert.setTitle("Appointment Confirmation");
+                alert.setMessage("Are you confirm with this appointment setup?");
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String email=mFirebaseAuth.getCurrentUser().getEmail();
+                        String clinic=dt.getClinic();
+                        String doctor=dt.getDoctor();
+                        String date=dt.getDate();
+                        String time=dt.getTime();
+
+                        //String id=mFirebaseAuth.getCurrentUser().getUid();
+                        String id=databaseUsers.push().getKey();
+                        Appointment newAppointment=new Appointment(id,email,clinic,doctor,date,time);
+                        databaseAppoinments.child(id).setValue(newAppointment);
+
+                        Toast.makeText(AppointmentDetailsActivity.this,"Your Appointment Have Been Submited",Toast.LENGTH_LONG).show();
+                        GoToMainActivity();
+                    }
+                });
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentDetailsActivity.this);
+
+                        builder.setTitle("Cancellation Appointment");
+                        builder.setMessage("Do you want to change the details?");
+                        builder.setPositiveButton("Yes, I want to change", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(AppointmentDetailsActivity.this, ClinicActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                        builder.setNegativeButton("No, I just want to cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(getApplicationContext(), "Your appoitnment setup has been cancelled", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(AppointmentDetailsActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                        builder.show();
+                    }
+                });
+                alert.show();
+
+
 
             }
         });
