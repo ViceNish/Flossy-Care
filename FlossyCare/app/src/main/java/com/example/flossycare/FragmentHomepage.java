@@ -122,6 +122,9 @@ public class FragmentHomepage extends Fragment {
         }
     }
 
+
+
+
     /*private void getUsername(){
         String id = mFirebaseAuth.getCurrentUser().getUid();
         DatabaseReference username = databaseUsers.child(id).child("userUsername");
