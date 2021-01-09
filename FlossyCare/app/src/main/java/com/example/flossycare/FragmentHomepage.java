@@ -24,10 +24,10 @@ public class FragmentHomepage extends Fragment {
     DatabaseReference databaseUsers;
     private FirebaseUser mFirebaseUser;
     private onFragmentBtnSelected listener;
-    private FirebaseDatabase db;
-    private DatabaseReference dbUser;
-    private String user;
-    private String id;
+    //private FirebaseDatabase db;
+   // private DatabaseReference dbUser;
+   // private String user;
+   // private String id;
 
     private Button btnAddappointment;
 
