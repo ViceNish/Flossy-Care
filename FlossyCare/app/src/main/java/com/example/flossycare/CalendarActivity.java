@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -70,9 +71,20 @@ public class CalendarActivity extends AppCompatActivity {
                 Details dt = Details.getItnstance();
                 dt.setDate(tVdate.getText().toString());
                 dt.setTime(tVtime.getText().toString());
+                if(dt.getTime().toString().equals(" --:-- ")  && dt.getDate().toString().equals("dd/mm/yy")){
+                    Toast.makeText(getApplicationContext(), "Please enter the date and time", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(CalendarActivity.this, AppointmentDetailsActivity.class);
-                startActivity(intent);
+                }else if (dt.getTime().toString().equals(" --:-- ")){
+                    Toast.makeText(getApplicationContext(), "Please enter the time", Toast.LENGTH_LONG).show();
+
+                }else if (dt.getDate().toString().equals("dd/mm/yy")){
+                    Toast.makeText(getApplicationContext(), "Please enter the date by tap on the calendar", Toast.LENGTH_LONG).show();
+
+                }else{
+                    Intent intent = new Intent(CalendarActivity.this, AppointmentDetailsActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 

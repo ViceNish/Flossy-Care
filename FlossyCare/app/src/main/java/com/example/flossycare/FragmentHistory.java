@@ -41,7 +41,7 @@ public class FragmentHistory extends Fragment {
         View view = inflater.inflate(R. layout.fragment_history, container, false);
 
         historyView = view.findViewById(R. id. lv_history);
-        lvHistory = new ArrayAdapter<String>(getContext(), android.R. layout. simple_list_item_2, android. R. id. text2);
+        lvHistory = new ArrayAdapter<String>(getContext(), android.R. layout. simple_list_item_2, android. R. id. text1);
         historyView.setAdapter(lvHistory);
 
         databaseHistory = FirebaseDatabase.getInstance().getReference("appointments");
