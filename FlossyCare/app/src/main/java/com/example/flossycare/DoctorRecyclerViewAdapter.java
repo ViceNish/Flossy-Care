@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,7 +64,7 @@ public class DoctorRecyclerViewAdapter extends RecyclerView.Adapter<DoctorRecycl
             Details dt = Details.getItnstance();
             dt.setDoctor(doctorList.get(getAdapterPosition()).getDoctorName());
 
-            Toast.makeText(v.getContext(),"Doctor Name " + doctorList.get(getAdapterPosition()).getDoctorName(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(v.getContext(),"Doctor Name " + doctorList.get(getAdapterPosition()).getDoctorName(),Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(v.getContext(), CalendarActivity.class );
 
             v.getContext().startActivity(intent);

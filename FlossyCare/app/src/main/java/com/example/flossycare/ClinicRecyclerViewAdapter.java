@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,7 +67,7 @@ public class ClinicRecyclerViewAdapter extends RecyclerView.Adapter<ClinicRecycl
             Details dt = Details.getItnstance();
             dt.setClinic(clinicList.get(getAdapterPosition()).getClinicName());
 
-            Toast.makeText(v.getContext(),"Clinic Name " + clinicList.get(getAdapterPosition()).getClinicName(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(v.getContext(),"Clinic Name " + clinicList.get(getAdapterPosition()).getClinicName(),Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(v.getContext(), DoctorActivity.class );
             intent.putExtra("clinicName",clinicList.get(getAdapterPosition()).getClinicName());
 
