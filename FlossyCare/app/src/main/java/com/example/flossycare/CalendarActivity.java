@@ -89,15 +89,15 @@ public class CalendarActivity extends AppCompatActivity {
 
                 }else if(flag.toString().equals("AM") && Hour <= 7 && Hour >= 0){
 
-                    Toast.makeText(getApplicationContext(), "The clinic open from 8AM - 5PM", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "The clinic open from 8AM - 5PM only", Toast.LENGTH_LONG).show();
 
                 }else if(flag.toString().equals("PM") &&( Hour <= 23 && Hour >= 18)){
 
-                    Toast.makeText(getApplicationContext(), "The clinic open from 8AM - 6PM", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "The clinic open from 8AM - 6PM only", Toast.LENGTH_LONG).show();
 
                 }else{
 
-                    Toast.makeText(getApplicationContext(), flag+" "+flag.length()+" "+Hour, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), flag+" "+flag.length()+" "+Hour, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(CalendarActivity.this, AppointmentDetailsActivity.class);
                     startActivity(intent);
                 }
