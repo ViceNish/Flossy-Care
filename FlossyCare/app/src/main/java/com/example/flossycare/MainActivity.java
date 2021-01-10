@@ -129,13 +129,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentHomepage()).commit();
         }
         if(item.getItemId() == R. id. history_nav){
-            getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentHistory()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentHistory()).addToBackStack(null).commit();
         }
         if(item.getItemId() == R. id. profile_nav){
-            getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentProfile()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentProfile()).addToBackStack(null).commit();
         }
         if(item.getItemId() == R. id. about_nav){
-            getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentAbout()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentAbout()).addToBackStack(null).commit();
         }
         if(item.getItemId() == R. id. logout_nav){
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
