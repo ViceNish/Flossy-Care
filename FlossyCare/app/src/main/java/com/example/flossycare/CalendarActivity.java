@@ -20,6 +20,7 @@ public class CalendarActivity extends AppCompatActivity {
 
     TextView tVdate, tVtime;
     int Hour, Minute;
+    String flag;
     DatePickerDialog.OnDateSetListener setListener;
     CalendarView calendarView;
     Button btnFinish;
@@ -74,6 +75,9 @@ public class CalendarActivity extends AppCompatActivity {
                 Details dt = Details.getItnstance();
                 dt.setDate(tVdate.getText().toString());
                 dt.setTime(tVtime.getText().toString());
+                String flag = dt.getTime().toString();
+                flag = flag.substring(6);
+
                 if(dt.getTime().toString().equals(" --:-- ")  && dt.getDate().toString().equals("dd/mm/yy")){
                     Toast.makeText(getApplicationContext(), "Please enter the date and time", Toast.LENGTH_LONG).show();
 
@@ -83,7 +87,17 @@ public class CalendarActivity extends AppCompatActivity {
                 }else if (dt.getDate().toString().equals("dd/mm/yy")){
                     Toast.makeText(getApplicationContext(), "Please enter the date by tap on the calendar", Toast.LENGTH_LONG).show();
 
+                }else if(flag.toString().equals("AM") && Hour <= 7 && Hour >= 0){
+
+                    Toast.makeText(getApplicationContext(), "The clinic open from 8AM - 5PM", Toast.LENGTH_LONG).show();
+
+                }else if(flag.toString().equals("PM") &&( Hour <= 23 && Hour >= 18)){
+
+                    Toast.makeText(getApplicationContext(), "The clinic open from 8AM - 6PM", Toast.LENGTH_LONG).show();
+
                 }else{
+
+                    Toast.makeText(getApplicationContext(), flag+" "+flag.length()+" "+Hour, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(CalendarActivity.this, AppointmentDetailsActivity.class);
                     startActivity(intent);
                 }
