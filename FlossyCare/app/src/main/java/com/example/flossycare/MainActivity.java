@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout.closeDrawer(GravityCompat.START);
         if(item.getItemId() == R. id. home_nav){
-            getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentHomepage()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentHomepage()).addToBackStack(null).commit();
         }
         if(item.getItemId() == R. id. history_nav){
             getSupportFragmentManager().beginTransaction().replace(R. id. container_fragment,new FragmentHistory()).addToBackStack(null).commit();
