@@ -8,6 +8,7 @@ public class Details {
     private String time;
     private String username;
     private String email;
+    private String userid;
 
     private static final Details ourInstance = new Details();
     public static Details getItnstance(){
@@ -63,5 +64,13 @@ public class Details {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 }
