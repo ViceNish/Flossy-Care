@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,8 +15,11 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class FragmentHomepage extends Fragment {
 
@@ -30,7 +34,7 @@ public class FragmentHomepage extends Fragment {
    // private String id;
 
     private Button btnAddappointment;
-
+    String userID;
 
 
     @Nullable
@@ -42,19 +46,36 @@ public class FragmentHomepage extends Fragment {
 
         tvUsername=(TextView) view.findViewById(R.id.tvUsername);
 
-        mFirebaseAuth=FirebaseAuth.getInstance();
-        databaseUsers= FirebaseDatabase.getInstance().getReference("users");
+
+
+
 
         //perlu letak try n catch sbb "The problem seems to be that your user is not yet logged in or even registered. So calling mAuth.getCurrentUser() returns null."
         //basically, kalau x letak nnty dye crash mase first time buka
         try {
-            tvUsername.setText(mFirebaseAuth.getCurrentUser().getEmail());
+            mFirebaseAuth=FirebaseAuth.getInstance();
+            databaseUsers= FirebaseDatabase.getInstance().getReference("users");
+            userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            databaseUsers.child(userID).child("userUsername").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String name = snapshot.getValue(String.class);
+                    tvUsername.setText("Hello "+name+" !");
+                    dt.setUsername(name);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            dt.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         }catch (Exception e){
 
         }
 
-        dt.setEmail(tvUsername.getText().toString());
 
+       // Toast.makeText(getActivity(), ""+dt.getEmail(), Toast.LENGTH_LONG).show();
 
         /*Details dt = Details.getItnstance();
 

@@ -41,6 +41,7 @@ public class ClinicActivity extends AppCompatActivity{
         allClinic.add(new Clinic("Oasis Dental Clinic", R. drawable.oasis_dental_clinic_ara_damansara));
         allClinic.add(new Clinic("Smile Avenue Dental Surgery", R. drawable.smile_avenue_dental_surgery));
         allClinic.add(new Clinic("Sparkle Care Dental Clinic", R. drawable.sparkle_care_dental_clinic));
+        allClinic.add(new Clinic("Metro Perdana Dental Clinic", R. drawable.metro_perdana_dental_clinic));
 
         return allClinic;
     }
