@@ -72,7 +72,7 @@ public class FragmentHomepage extends Fragment {
         }
 
         dt.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        Toast.makeText(getActivity(), ""+dt.getEmail(), Toast.LENGTH_LONG).show();
+       // Toast.makeText(getActivity(), ""+dt.getEmail(), Toast.LENGTH_LONG).show();
 
         /*Details dt = Details.getItnstance();
 
