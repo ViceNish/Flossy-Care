@@ -18,12 +18,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    protected EditText etEmail,etPassword,etConfirmPassword;
+    protected EditText etEmail,etPassword,etConfirmPassword,etUsername;
     protected Button btnRegister;
     protected TextView tvLogin, tvTnc;
     protected CheckBox checkBox;
@@ -35,6 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
   //  DatabaseReference databaseUsers;
 
     private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    String userid;
 
    // List<User> users;
 
@@ -49,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         etEmail= (EditText) findViewById(R.id.register_et_email);
-       // etUsername= (EditText) findViewById(R.id.register_et_username);
+        etUsername= (EditText) findViewById(R.id.register_et_username);
         etPassword= (EditText) findViewById(R.id.register_et_password);
         etConfirmPassword= (EditText) findViewById(R.id.register_et_confirm_password);
 
@@ -92,12 +95,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void checkCredentialsAndSuccess(){
 
         String email=etEmail.getText().toString().trim();
-       // String username=etUsername.getText().toString().trim();
+        String username=etUsername.getText().toString().trim();
         String password=etPassword.getText().toString().trim();
         String confirmpassword=etConfirmPassword.getText().toString().trim();
         if(email.isEmpty() || !email.contains("@")){
@@ -117,9 +121,10 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        String id=databaseUsers.push().getKey();
-                        User newUser=new User(id,email,password);
-                        databaseUsers.child(id).setValue(newUser);
+
+                        userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        User newUser=new User(userid,username,email,password);
+                        databaseUsers.child(userid).setValue(newUser);
 
                         GoToMainActivity();
                     }else{

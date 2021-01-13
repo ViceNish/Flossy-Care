@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FragmentProfile extends Fragment {
 
-    private TextView tvChangePass, tvEmail;
+    private TextView tvChangePass, tvEmail, tvUsername;
     private Button btnDeleteAcc;
 
 
@@ -37,15 +37,18 @@ public class FragmentProfile extends Fragment {
         tvChangePass=(TextView) view.findViewById(R.id.btn_change_password);
         btnDeleteAcc=(Button) view.findViewById(R.id.btn_delete_acc);
         tvEmail = (TextView) view.findViewById(R.id. tV_profile_email);
+        tvUsername = (TextView) view.findViewById(R.id. tV_profile_username);
 
        // Details dt = Details.getItnstance();
 
         //tvUsername.setText(dt.getUsername());
+        Details dt = Details.getItnstance();
 
         mFirebaseAuth=FirebaseAuth.getInstance();
         databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
-        tvEmail.setText(mFirebaseAuth.getCurrentUser().getEmail());
+        tvEmail.setText(dt.getEmail());
+        tvUsername.setText(dt.getUsername());
 
         tvChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
