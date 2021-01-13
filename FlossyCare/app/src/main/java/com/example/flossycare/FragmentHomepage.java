@@ -46,14 +46,16 @@ public class FragmentHomepage extends Fragment {
 
         tvUsername=(TextView) view.findViewById(R.id.tvUsername);
 
-        mFirebaseAuth=FirebaseAuth.getInstance();
-        databaseUsers= FirebaseDatabase.getInstance().getReference("users");
 
-        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
 
         //perlu letak try n catch sbb "The problem seems to be that your user is not yet logged in or even registered. So calling mAuth.getCurrentUser() returns null."
         //basically, kalau x letak nnty dye crash mase first time buka
         try {
+            mFirebaseAuth=FirebaseAuth.getInstance();
+            databaseUsers= FirebaseDatabase.getInstance().getReference("users");
+            userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
             databaseUsers.child(userID).child("userUsername").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,11 +69,12 @@ public class FragmentHomepage extends Fragment {
 
                 }
             });
+            dt.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         }catch (Exception e){
 
         }
 
-        dt.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
        // Toast.makeText(getActivity(), ""+dt.getEmail(), Toast.LENGTH_LONG).show();
 
         /*Details dt = Details.getItnstance();
