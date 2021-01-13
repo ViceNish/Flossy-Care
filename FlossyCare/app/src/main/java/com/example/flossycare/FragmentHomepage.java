@@ -56,7 +56,7 @@ public class FragmentHomepage extends Fragment {
             databaseUsers= FirebaseDatabase.getInstance().getReference("users");
             userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
             dt.setUserid(userID);
-            Toast.makeText(getActivity(), ""+dt.getUserid(),Toast.LENGTH_LONG).show();
+           // Toast.makeText(getActivity(), ""+dt.getUserid(), Toast.LENGTH_LONG).show();
             databaseUsers.child(userID).child("userUsername").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
