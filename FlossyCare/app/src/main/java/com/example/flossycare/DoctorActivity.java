@@ -45,11 +45,14 @@ public class DoctorActivity extends AppCompatActivity {
             case "Dutamas Dental Clinic":
                 allDoctor.add(new Doctor("Dr. Alex Yee", R. drawable.dr__alex_yee_ji_ziang));
                 allDoctor.add(new Doctor("Dr. Chu Wooi", R. drawable.dr__chu_wooi_cheat));
+                allDoctor.add(new Doctor("Dr. Tina Lim", R. drawable.dr__tina_lim_zi_tian));
                 break;
 
             case "Lou Dental Surgery":
                 allDoctor.add(new Doctor("Dr. Eileen Teoh", R. drawable.dr__eileen_teoh_ee_ling));
-                allDoctor.add(new Doctor("Dr. Johnson", R. drawable.dr__johnson));
+                allDoctor.add(new Doctor("Dr. Nurul Huda", R. drawable.dr__nurul_huda_hasan));
+                allDoctor.add(new Doctor("Dr. Chong Sze Yin", R. drawable.dr__chong_sze_yin));
+                allDoctor.add(new Doctor("Dr. Koh Hui Wei", R. drawable.dr__koh_hui_yee));
                 break;
 
             case "Mahkota Dental Centre":
@@ -70,6 +73,12 @@ public class DoctorActivity extends AppCompatActivity {
             case "Sparkle Care Dental Clinic":
                 allDoctor.add(new Doctor("Dr. Philip Han", R. drawable.dr_philip_han_sheng_hui));
                 allDoctor.add(new Doctor("Dr. Saliana", R. drawable.dr_saliana_binti_a_aziz));
+                break;
+
+            case "Metro Perdana Dental Clinic":
+                allDoctor.add(new Doctor("Dr. Goh Seong", R. drawable. dr__goh_seong_ling));
+                allDoctor.add(new Doctor("Dr. Cindy Peh", R. drawable. dr__cindy_peh_xuan_lin));
+                allDoctor.add(new Doctor("Dr. Lau Han", R. drawable. dr__lau_han_wei));
                 break;
         }
 
