@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentAbout.onFragmentBtnSelected,FragmentProfile.onFragmentBtnSelected, FragmentHomepage.onFragmentBtnSelected{
 
@@ -64,7 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
 
-
+        //String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //Toast.makeText(this, ""+userid, Toast.LENGTH_LONG).show();
 
 
 
@@ -182,6 +185,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBtnDeleteAcc(){
+
+        Details dt = Details.getItnstance();
+
         AlertDialog.Builder dialog=new AlertDialog.Builder(MainActivity.this);
         dialog.setTitle("Are You Sure?");
         dialog.setMessage("Deleting this account will result completely removing your account from the system and you won't be able to access the app.");
@@ -192,6 +198,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
+
+                            DatabaseReference dR = FirebaseDatabase.getInstance().getReference("users").child(dt.getUserid().toString());
+                            dR.removeValue();
+
                             Toast.makeText(MainActivity.this,"Account Deleted",Toast.LENGTH_LONG).show();
                             Intent intent=new Intent(MainActivity.this,StartScreenActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
